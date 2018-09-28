@@ -1,0 +1,133 @@
+{% extends "bootstrap/base.html" %}
+
+
+
+
+{% block navbar %}
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agency - Start Bootstrap Theme</title>
+
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <!-- Theme CSS -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="{{ url_for('main.index') }}">Kenneth Clark <small>PAINTING LLC</small> </a> 
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                    <li><a href="{{ url_for('main.index') }}#about">About</a></li>
+                    <li><a href="{{ url_for('main.index') }}#contact">Contact</a></li>
+                    {% if current_user.has_access(2) or current_user.has_access(1) %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle navbar-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">App<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('main.quoteRequests', statusFlag='False') }}">Active</a></li>
+                                <li><a href="{{ url_for('main.quoteRequests', statusFlag='True') }}">Complete</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+                            <li><a href="{{
+                            url_for('main.workOrder') }}">Work Order</a></li>
+                            <li><a href="{{ url_for('main.activity') }}">My Activity</a></li>
+                            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% elif current_user.is_anonymous %}
+                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                    {% else %}
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">App<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+                                <li><a href="{{
+                                url_for('main.workOrder') }}">Work Order</a></li>
+                                <li><a href="{{ url_for('main.activity') }}">My Activity</a></li>
+                                <li><a href="{{ url_for('auth.logout') }}"></a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+                        <li><a href="{{
+                        url_for('main.workOrder') }}">Work Order</a></li>
+                        <li><a href="{{ url_for('main.activity') }}">My Activity</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                    {% endif %}
+                    <li><a href="tel: 1-6103483497"><i class="fa fa-phone"></i> 610-348-3497</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+{% endblock %}
+
+{% block content %}
+{% block app_content %}{% endblock %}
+
+{% block footer %}
+
+<footer>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; Kenneth Clark Painting 2018</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://www.instagram.com/kennethclarkpainting/"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/Kenneth-Clark-Painting-432711883881899/"><i class="fa fa-facebook"></i></a>
+                    <li><a href="#"><i class="fa fa-google"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="tel:1-6103483497"><i class="fa fa-phone"></i> <b>610-348-3497<b></a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='static.js') }}"></script>
+    {{ moment.include_moment() }}
+{% endblock %}
+
+
+
+

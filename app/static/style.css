@@ -270,7 +270,7 @@ header {
         linear-gradient(
       rgba(0, 0, 0, 0.93), 
       rgba(0, 0, 0, 0.65)
-    ), url('logo.png');
+    ), url('kcpaint_logo.png');
 /*  background-image: url('../img/paint_tools.jpg');*/
   background-repeat: no-repeat;
   background-attachment: scroll;

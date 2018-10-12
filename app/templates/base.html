@@ -70,14 +70,10 @@
                                 <li><a href="{{
                                 url_for('main.workOrder') }}">Work Order</a></li>
                                 <li><a href="{{ url_for('main.activity') }}">My Activity</a></li>
-                                <li><a href="{{ url_for('auth.logout') }}"></a></li>
+                                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
-                        <li><a href="{{
-                        url_for('main.workOrder') }}">Work Order</a></li>
-                        <li><a href="{{ url_for('main.activity') }}">My Activity</a></li>
-                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+
                     {% endif %}
                     <li><a href="tel: 1-6103483497"><i class="fa fa-phone"></i> 610-348-3497</a></li>
                 </ul>

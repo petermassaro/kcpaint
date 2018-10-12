@@ -268,8 +268,8 @@ header {
   padding-top: 220px;
   background: 
         linear-gradient(
-      rgba(0, 0, 0, 0.93), 
-      rgba(0, 0, 0, 0.65)
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.45)
     ), url('kcpaint_logo.png');
 /*  background-image: url('../img/paint_tools.jpg');*/
   background-repeat: no-repeat;

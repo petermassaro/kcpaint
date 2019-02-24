@@ -4,6 +4,7 @@ from wtforms import StringField, TextAreaField, PasswordField, \
 from wtforms.validators import DataRequired, ValidationError, \
 	Email, EqualTo, Length
 from flask_wtf.file import FileField
+from flask_pagedown.fields import PageDownField
 
 
 class QuoteRequestForm(FlaskForm):
@@ -51,5 +52,10 @@ class JobNoteForm(FlaskForm):
 	note = TextAreaField('Note')
 	image = FileField('Image Upload')
 	submit = SubmitField('Submit')
+
+class CustomMessageForm(FlaskForm):
+    custom_message = PageDownField("Enter Custom E-Mail Message") 
+    submit = SubmitField('Submit')
+
 
 

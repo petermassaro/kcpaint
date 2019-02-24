@@ -122,6 +122,7 @@
     {{ super() }}
     <script src="{{ url_for('static', filename='static.js') }}"></script>
     {{ moment.include_moment() }}
+    {{ pagedown.include_pagedown() }}
 {% endblock %}
 
 

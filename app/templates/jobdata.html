@@ -23,6 +23,15 @@
 	<div class="container">
 		{{ wtf.quick_form(form) }}
 	</div>
+	<a href="{{ url_for('main.addCustomMessage', quoteId=quoteRequest.id) }}">Enter Custom Message</a>
+	<div class="container">
+        <input type='checkbox' id='address' style='padding-bottom; 20px;' onclick='displayAddressFields()' checked>Show Custom Message Fields<br> 
+			            <p onclick='displayAddressFields()'>
+					
+	<div id="address_optional" style="display: none;">
+            {{ wtf.quick_form(custom_message_form) }}
+        </div>
+			            </p>
 	<div class="container  action-buttons">
 		<div class="btn-toolbar">
 			<a href="{{ url_for('main.sendEstimate', quoteId=quoteRequest.id, docType='Estimate') }}" class='btn btn-primary'>Send Estimate</a>

@@ -3,7 +3,7 @@ from app.main import bp
 from flask import render_template, url_for, flash, redirect, request, current_app
 from flask_login import login_user, logout_user, current_user, login_required
 from app.main.forms import QuoteRequestForm, JobDataForm, UserInfoForm, \
-	WorkOrderForm, JobNoteForm
+	WorkOrderForm, JobNoteForm, CustomMessageForm
 from app.models import QuoteRequests, User, JobData, Customer, JobNote
 from app.sendSMS import sendSMS, send_email, send_estimate, create_stripe_customer, send_stripe_invoice
 from app.decorators import admin_required, permission_required
@@ -236,6 +236,7 @@ def jobdata(quoteId):
 	form = JobDataForm()
 	q_request = QuoteRequests.query.filter_by(id=quoteId).first_or_404()
 	jobItems = q_request.job.all()
+	custom_message_form = CustomMessageForm(obj=q_request)
 	if form.validate_on_submit():
 		jobData = JobData(
 			quote_id=quoteId,
@@ -246,7 +247,12 @@ def jobdata(quoteId):
 		db.session.commit()
 		flash("Job Detail Submitted")
 		return redirect(url_for('main.jobdata', quoteId=jobData.quote_id))
-	return render_template('jobdata.html', form=form, quoteRequest=q_request,
+	if custom_message_form.validate_on_submit():
+		q_request.custom_message = custom_message_form.custom_message.data
+		db.session.commit()
+		flash("Custom Message Added")
+		return redirect(url_for('main.jobdata', quoteId=jobData.quote_id))
+	return render_template('jobdata.html', form=form, custom_message_form=custom_message_form, quoteRequest=q_request,
 		job_items=jobItems)
 
 
@@ -263,7 +269,20 @@ def editJobData(quoteId, itemId):
 		db.session.commit()
 		flash('Job detail edited')
 		return redirect(url_for('main.jobdata', quoteId=quoteId))
-	return render_template('quote.html', form=form)
+	return render_template('jobentry.html', form=form)
+
+@bp.route('/addCustomMessage/<quoteId>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def addCustomMessage(quoteId):
+	q_request = QuoteRequests.query.filter_by(id=quoteId).first_or_404()
+	form = CustomMessageForm(obj=q_request)
+	if form.validate_on_submit():
+		q_request.custom_message = form.custom_message.data
+		db.session.commit()
+		flash('Custom Message Entered')
+		return redirect(url_for('main.jobdata', quoteId=quoteId))
+	return render_template('custom_message.html', form=form)
 
 
 @bp.route('/smsCustomerDetails/<quoteId>', methods=['GET','POST'])

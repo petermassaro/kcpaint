@@ -11,6 +11,7 @@ from flask_moment import Moment
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
+from flask_pagedown import PageDown
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -19,6 +20,7 @@ bootstrap = Bootstrap()
 mail = Mail()
 s3 = S3()
 twilio = Twilio()
+pagedown = PageDown()
 
 
 
@@ -39,6 +41,7 @@ def create_app(config_class=Config):
     s3.init_app(app)
     twilio.init_app(app)
     moment = Moment(app)
+    pagedown.init_app(app)
 
 
     from app.auth import bp as auth_bp

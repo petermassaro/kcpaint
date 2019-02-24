@@ -6,6 +6,8 @@ from flask import current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 # from app.awsHelpers import get_presigned_url
+from markdown import markdown
+import bleach
 
 
 
@@ -37,6 +39,8 @@ class QuoteRequests(db.Model):
 	job = db.relationship('JobData', backref='data', lazy='dynamic')
 	notes = db.relationship('JobNote', backref='data', lazy='dynamic')
 	user_id = db.Column(db.Integer, db.ForeignKey('User.id'))
+	custom_message = db.Column(db.Text, unique=False)
+	custom_message_html = db.Column(db.Text)
 
 
 	def __repr__(self):
@@ -73,6 +77,17 @@ class QuoteRequests(db.Model):
 		except:
 			return
 		return QuoteRequests.query.get(id)
+
+	@staticmethod
+	def on_changed_body(target, value, oldvalue, initiator):
+		allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+                        'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+                        'h1', 'h2', 'h3', 'p']
+		target.custom_message_html =  bleach.linkify(bleach.clean(
+			markdown(value, output_format='html'),
+			tags=allowed_tags, strip=True))
+
+db.event.listen(QuoteRequests.custom_message, 'set', QuoteRequests.on_changed_body)
 
 
 

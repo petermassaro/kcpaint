@@ -49,7 +49,7 @@ class QuoteRequests(db.Model):
 
 	def generateTotal(self, stripe=False):
 		jobItems = JobData.query.filter(JobData.quote_id==self.id).all()
-		total = sum(item.estimate for item in jobItems)
+		total = sum(item.estimate for item in jobItems if not item.description.startswith('*'))
 		if stripe:
 			return total*100
 		return total

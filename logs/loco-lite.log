@@ -1,1 +1,53 @@
 2019-02-16 15:46:05,663 INFO: loco-lite startup [in /Users/petermassaro/kcPaint/app/__init__.py:86]
+2019-02-24 17:55:41,342 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 17:58:35,120 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:00:08,800 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:04:38,968 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:04:44,185 ERROR: Exception on /deleteLineItem/7 [GET] [in /home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py:1560]
+Traceback (most recent call last):
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/pete/Projects/kcpaint/app/decorators.py", line 13, in decorated_function
+    return f(*args, **kwargs)
+TypeError: deleteLineItem() missing 1 required positional argument: 'quoteId'
+2019-02-24 18:06:02,460 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:07:11,630 ERROR: Exception on /jobdata/6 [POST] [in /home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py:1560]
+Traceback (most recent call last):
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/pete/Projects/kcpaint/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/pete/Projects/kcpaint/app/decorators.py", line 13, in decorated_function
+    return f(*args, **kwargs)
+  File "/home/pete/Projects/kcpaint/app/main/routes.py", line 254, in jobdata
+    return redirect(url_for('main.jobdata', quoteId=jobData.quote_id))
+UnboundLocalError: local variable 'jobData' referenced before assignment
+2019-02-24 18:12:44,564 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:26:11,613 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:29:29,116 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:31:03,536 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:36:25,638 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:42:30,922 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]
+2019-02-24 18:44:27,634 INFO: loco-lite startup [in /home/pete/Projects/kcpaint/app/__init__.py:89]

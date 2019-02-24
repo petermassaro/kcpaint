@@ -247,11 +247,6 @@ def jobdata(quoteId):
 		db.session.commit()
 		flash("Job Detail Submitted")
 		return redirect(url_for('main.jobdata', quoteId=jobData.quote_id))
-	if custom_message_form.validate_on_submit():
-		q_request.custom_message = custom_message_form.custom_message.data
-		db.session.commit()
-		flash("Custom Message Added")
-		return redirect(url_for('main.jobdata', quoteId=jobData.quote_id))
 	return render_template('jobdata.html', form=form, custom_message_form=custom_message_form, quoteRequest=q_request,
 		job_items=jobItems)
 
@@ -270,6 +265,15 @@ def editJobData(quoteId, itemId):
 		flash('Job detail edited')
 		return redirect(url_for('main.jobdata', quoteId=quoteId))
 	return render_template('jobentry.html', form=form)
+
+@bp.route('/deleteLineItem/<quoteId>/<itemId>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def deleteLineItem(quoteId, itemId):
+	JobData.query.filter_by(id=itemId).delete()
+	db.session.commit()
+	return redirect(url_for('main.jobdata', quoteId=quoteId))
+
 
 @bp.route('/addCustomMessage/<quoteId>', methods=['GET', 'POST'])
 @login_required
